@@ -6,10 +6,15 @@ from deep_translator import GoogleTranslator, single_detection
 
 def send():
     label = tk.Label(frame_inner, text='teste', font=app_font, bg="#001900", fg="#009600")
-    label.grid(row=frame_inner.grid_size()[1], column=0, sticky='ew')
-    frame_inner.grid_columnconfigure(0, weight=1)
+    label1 = tk.Label(frame_inner, text='teste', font=app_font, bg="#001900", fg="#009600")
+    label.grid(column=2, sticky='ew')
+    label1.grid(column=0, sticky='ew')
+    frame_inner.grid_columnconfigure(1, weight=1)
 
     canvas.configure(scrollregion=canvas.bbox("all"))
+
+def on_canvas_resize(event):
+    canvas.itemconfig(frame_window, width=event.width)
 
 #def on_enter(event):
   
@@ -19,9 +24,9 @@ def translate(tl_text, lang):
 
 root = tk.Tk()
 
-root.geometry("500x500")
-root.minsize(500, 500)
-root.maxsize(500, 500)
+root.geometry("800x800")
+root.minsize(800, 800)
+#root.maxsize(800, 800)
 
 root['bg'] = "#001900"
 
@@ -49,7 +54,9 @@ root.grid_columnconfigure(1, weight=1)
 scrollbar.config(command=canvas.yview)
 
 frame_inner = tk.Frame(canvas, bg="yellow")
-canvas.create_window((0, 0), window=frame_inner, anchor='nw', width=canvas.winfo_reqwidth(), height=canvas.winfo_reqheight())
+frame_window = canvas.create_window((0, 0), window=frame_inner, anchor='nw')
+
+canvas.bind('<Configure>', on_canvas_resize)
 
 frame_inner.bind(
     "<Configure>",
