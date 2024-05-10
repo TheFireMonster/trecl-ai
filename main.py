@@ -1,8 +1,9 @@
 from config import lang_token
 
+from deep_translator import GoogleTranslator, single_detection
+
 import tkinter as tk
 
-from deep_translator import GoogleTranslator, single_detection
 
 def send():
     label = tk.Label(frame_inner, text='teste', font=app_font, bg="#001900", fg="#009600")
@@ -21,6 +22,7 @@ def on_canvas_resize(event):
 
 def translate(tl_text, lang):
     return GoogleTranslator(source='auto', target=lang).translate(tl_text)
+
 
 root = tk.Tk()
 
