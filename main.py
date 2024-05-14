@@ -1,4 +1,8 @@
+from chatterbot import ChatBot
+
 from config import lang_token
+
+from datetime import datetime
 
 from deep_translator import GoogleTranslator, single_detection
 
@@ -6,8 +10,13 @@ import tkinter as tk
 
 
 def send():
-    label = tk.Label(frame_inner, text='teste', font=app_font, bg="#001900", fg="#009600")
-    label1 = tk.Label(frame_inner, text='teste', font=app_font, bg="#001900", fg="#009600")
+    now = datetime.now()
+    timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
+    label = tk.Label(frame_inner, text=f"{timestamp} You: {tl_text.get()}", font=app_font, bg="#001900", fg="#009600")
+    response = bot.get_response(tl_text.get())
+    now = datetime.now()
+    timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
+    label1 = tk.Label(frame_inner, text=f"{timestamp} Emerald: {response}", font=app_font, bg="#001900", fg="#009600")
     label.grid(column=2, sticky='ew')
     label1.grid(column=0, sticky='ew')
     frame_inner.grid_columnconfigure(1, weight=1)
@@ -23,6 +32,21 @@ def on_canvas_resize(event):
 def translate(tl_text, lang):
     return GoogleTranslator(source='auto', target=lang).translate(tl_text)
 
+
+bot = ChatBot(
+    'Emerald',
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    logic_adapters=[
+        {
+            'import_path': 'chatterbot.logic.BestMatch',
+            'default_response': 'I am sorry, but I do not understand.',
+            'maximum_similarity_threshold': 0.90
+#        'chatterbot.logic.MathematicalEvaluation',
+#        'chatterbot.logic.TimeLogicAdapter'
+        }
+    ],
+    database_uri='sqlite:///database.sqlite3'
+)
 
 root = tk.Tk()
 
@@ -47,7 +71,7 @@ frame_bottom.grid(row=2, column=1, columnspan=2, sticky='ew')
 scrollbar = tk.Scrollbar(root)
 scrollbar.grid(row=0, column=3, rowspan=3, sticky='ns')
 
-canvas = tk.Canvas(root, bg="red", bd=0, highlightthickness=0, yscrollcommand=scrollbar.set)
+canvas = tk.Canvas(root, bg="#001900", bd=0, highlightthickness=0, yscrollcommand=scrollbar.set)
 canvas.grid(row=1, column=0, columnspan=3, sticky='nsew')
 
 root.grid_rowconfigure(1, weight=1)
@@ -55,7 +79,7 @@ root.grid_columnconfigure(1, weight=1)
 
 scrollbar.config(command=canvas.yview)
 
-frame_inner = tk.Frame(canvas, bg="yellow")
+frame_inner = tk.Frame(canvas, bg="#001900")
 frame_window = canvas.create_window((0, 0), window=frame_inner, anchor='nw')
 
 canvas.bind('<Configure>', on_canvas_resize)
