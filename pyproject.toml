@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "python-template"
+name = "trecl-ai"
 version = "0.1.0"
-description = ""
+description = "AI for translating and helping learning languages"
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]

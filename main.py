@@ -1,22 +1,32 @@
-from chatterbot import ChatBot
-
-from config import lang_token
-
+import tkinter as tk
 from datetime import datetime
 
+from chatterbot import ChatBot
 from deep_translator import GoogleTranslator, single_detection
 
-import tkinter as tk
+from config import lang_token
 
 
 def send():
     now = datetime.now()
     timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    label = tk.Label(frame_inner, text=f"{timestamp} You: {tl_text.get()}", font=app_font, bg="#001900", fg="#009600")
+    label = tk.Label(
+        frame_inner, 
+        text=f"{timestamp} You: {tl_text.get()}", 
+        font=app_font, 
+        bg="#001900", 
+        fg="#009600"
+    )
     response = bot.get_response(tl_text.get())
     now = datetime.now()
     timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    label1 = tk.Label(frame_inner, text=f"{timestamp} Emerald: {response}", font=app_font, bg="#001900", fg="#009600")
+    label1 = tk.Label(
+        frame_inner, 
+        text=f"{timestamp} Emerald: {response}",
+        font=app_font, 
+        bg="#001900", 
+        fg="#009600"
+    )
     label.grid(column=2, sticky='ew')
     label1.grid(column=0, sticky='ew')
     frame_inner.grid_columnconfigure(1, weight=1)
@@ -71,7 +81,13 @@ frame_bottom.grid(row=2, column=1, columnspan=2, sticky='ew')
 scrollbar = tk.Scrollbar(root)
 scrollbar.grid(row=0, column=3, rowspan=3, sticky='ns')
 
-canvas = tk.Canvas(root, bg="#001900", bd=0, highlightthickness=0, yscrollcommand=scrollbar.set)
+canvas = tk.Canvas(
+    root, 
+    bg="#001900", 
+    bd=0, 
+    highlightthickness=0, 
+    yscrollcommand=scrollbar.set
+)
 canvas.grid(row=1, column=0, columnspan=3, sticky='nsew')
 
 root.grid_rowconfigure(1, weight=1)
@@ -89,13 +105,28 @@ frame_inner.bind(
     lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
 )
 
-
-message = tk.Label(frame_top, text="TRECL-AI", font=app_font, bg="#001900", fg="#009600")
+message = tk.Label(
+    frame_top, 
+    text="TRECL-AI", 
+    font=app_font, 
+    bg="#001900", 
+    fg="#009600"
+)
 message.pack(expand=True)
 tl_text = tk.StringVar()
-text_input = tk.Entry(frame_bottom, textvariable=tl_text, width=50, font=app_font)
+text_input = tk.Entry(
+    frame_bottom, 
+    textvariable=tl_text, 
+    width=50, 
+    font=app_font
+)
 text_input.pack(side=tk.LEFT, expand=True, fill=tk.X)
-send_button = tk.Button(frame_bottom, text="Send", font=app_font, command=send)
+send_button = tk.Button(
+    frame_bottom, 
+    text="Send", 
+    font=app_font, 
+    command=send
+)
 send_button.pack(side=tk.RIGHT)
 
 #root.bind('<Return>', on_enter)
