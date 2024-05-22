@@ -6,34 +6,42 @@ from deep_translator import GoogleTranslator, single_detection
 
 from config import lang_token
 
+class Chat:
 
-def send():
-    now = datetime.now()
-    timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    msg = tk.Message(
-        frame_inner, 
-        text=f"{timestamp} You: {tl_text.get()}", 
-        aspect=500,
-        font=app_font, 
-        bg="#001900", 
-        fg="#009600"
-    )
-    response = bot.get_response(tl_text.get())
-    now = datetime.now()
-    timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    msg1 = tk.Message(
-        frame_inner, 
-        text=f"{timestamp} Emerald: {response}",
-        aspect=500,
-        font=app_font, 
-        bg="#001900", 
-        fg="#009600"
-    )
-    msg.grid(column=2, sticky='ew')
-    msg1.grid(column=0, sticky='ew')
-    frame_inner.grid_columnconfigure(1, weight=1)
+    def __init__(self):
+        self.msg = tk.Message(
+            frame_inner, 
+            text=f"{self.timestamp1} You:\n{tl_text.get()}", 
+            width=root.winfo_width() // 4,
+            font=app_font, 
+            bg="#001900", 
+            fg="#009600"
+        )
+        self.msg1 = tk.Message(
+            frame_inner, 
+            text=f"{self.timestamp2} Emerald:\n{self.response}",
+            width=root.winfo_width() // 4,
+            font=app_font, 
+            bg="#001900", 
+            fg="#009600"
+        )
 
-    canvas.configure(scrollregion=canvas.bbox("all"))
+        """ def update_msg_width(event):
+        new_width = root.winfo_width() // 4
+        msg1.config(width=new_width) """
+
+    def send(self):
+        now = datetime.now()
+        self.timestamp1 = now.strftime('%Y-%m-%d|%H:%M:%S')
+        self.response = bot.get_response(tl_text.get())
+        now = datetime.now()
+        self.timestamp2 = now.strftime('%Y-%m-%d|%H:%M:%S')
+        
+        self.msg.grid(column=2, sticky='ew')
+        self.msg1.grid(column=0, sticky='ew')
+        frame_inner.grid_columnconfigure(1, weight=1)
+
+        canvas.configure(scrollregion=canvas.bbox("all"))
 
 def on_canvas_resize(event):
     canvas.itemconfig(frame_window, width=event.width)
@@ -127,7 +135,7 @@ send_button = tk.Button(
     frame_bottom, 
     text="Send", 
     font=app_font, 
-    command=send
+    command=Chat.send(self)
 )
 send_button.pack(side=tk.RIGHT)
 
