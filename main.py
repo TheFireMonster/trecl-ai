@@ -10,9 +10,10 @@ from config import lang_token
 def send():
     now = datetime.now()
     timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    label = tk.Label(
+    msg = tk.Message(
         frame_inner, 
         text=f"{timestamp} You: {tl_text.get()}", 
+        aspect=500,
         font=app_font, 
         bg="#001900", 
         fg="#009600"
@@ -20,15 +21,16 @@ def send():
     response = bot.get_response(tl_text.get())
     now = datetime.now()
     timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-    label1 = tk.Label(
+    msg1 = tk.Message(
         frame_inner, 
         text=f"{timestamp} Emerald: {response}",
+        aspect=500,
         font=app_font, 
         bg="#001900", 
         fg="#009600"
     )
-    label.grid(column=2, sticky='ew')
-    label1.grid(column=0, sticky='ew')
+    msg.grid(column=2, sticky='ew')
+    msg1.grid(column=0, sticky='ew')
     frame_inner.grid_columnconfigure(1, weight=1)
 
     canvas.configure(scrollregion=canvas.bbox("all"))
