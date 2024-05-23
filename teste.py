@@ -16,55 +16,63 @@ bot = ChatBot(
     database_uri='sqlite:///database.sqlite3'
 )
 
-conversation = [
-    "Can you teach me something in japanese?",
-    "Do you want something simple to begin?",
-    "Yes",
-    "Okay let me see... Well... How about we try to learn about a japanese greeting?"
-    "Okay!"
-    "We could say 'おはよう'(ohayou), that means good morning in a casual way. If you want to say it politely. You can use 'おはようございます'(ohayou gozaimasu) to say it in a polite way"
-    "I see, thank you!",
-    "You're welcome! Anything you have mind, just ask me."
+# conversation = [
+#     "Can you teach me something in japanese?",
+#     "Do you want something simple to begin?",
+#     "Yes",
+#     "Okay let me see... Well... How about we try to learn about a japanese greeting?"
+#     "Okay!"
+#     "We could say 'おはよう'(ohayou), that means good morning in a casual way. If you want to say it politely. You can use 'おはようございます'(ohayou gozaimasu) to say it in a polite way"
+#     "I see, thank you!",
+#     "You're welcome! Anything you have mind, just ask me."
 
-]
+# ]
 
 trainer = ListTrainer(bot)
 trainer2 = ChatterBotCorpusTrainer(bot)
 
-trainer.train(conversation)
+# trainer.train(conversation)
 
 trainer.train([
-    "Can you teach me something in japanese?",
-    "Do you want something simple to begin?",
-    "Yes",
-    "Okay let me see... Well... How about we try to learn about a japanese greeting?"
-    "Okay!"
-    "We could say 'こんにちは'(konnichiwa), this is how you say 'hello' during the day in a formal way in japanese"
-    "I see, thank you!",
-    "You're welcome! Anything you have mind, just ask me."
+    "Olá!",
+    "Oi!",
+    "Tudo bem?",
+    "Estou ótima e você?",
+    "Estou bem também",
+    "Fico feliz em saber! Você quer aprender algo em japonês?",
+    "Quero sim! Pode me falar uma forma de dizer oi ou olá?",
+    "Claro! Podemos dizer 'こんにちは'(konnichiwa). É assim que você diz 'oi' ou 'olá' em linguagem formal e durante o dia em japonês.",
+    "Durante o dia e formal?",
+    "Em japonês existem diversas formas de como se comunicar dependendo do contexto. Se você quiser eu posso te ensinar mais.",
+    "Entendi, obrigado",
+    "Qualquer dúvida, só me perguntar!:)"
 ])
 
 trainer.train([
-    "Can you teach me something in japanese?",
-    "Do you want something simple to begin?",
-    "Yes",
-    "Okay let me see... Well... How about we try to learn about a japanese greeting?"
-    "Okay!"
-    "We could say 'こんばんは'(konbanwa), this is how you say 'good evening' in japanese"
-    "I see, thank you!",
-    "You're welcome! Anything you have mind, just ask me."
+    "Oi",
+    "Olá!",
+    "Como você está hoje?",
+    "Estou ótima e você?",
+    "Estou bem também",
+    "Fico feliz em saber! Você quer aprender algo em japonês?",
+    "Quero sim! Pode me falar uma forma de dizer oi ou olá?",
+    "Claro! Podemos dizer 'こんにちは'(konnichiwa). É assim que você diz 'oi' ou 'olá' em linguagem formal e durante o dia em japonês.",
+    "Durante o dia e formal?",
+    "Em japonês existem diversas formas de como se comunicar dependendo do contexto. Se você quiser eu posso te ensinar mais.",
+    "Entendi, obrigado",
+    "Qualquer dúvida, só me perguntar!:)"
 ])
 
-trainer.train([
-    "Can you teach me something in japanese?",
-    "Do you want something simple to begin?",
-    "Yes",
-    "Okay let me see... Well... How about we try to learn about a japanese greeting?"
-    "Okay!"
-    "We could say 'おやすみなさい'(oyasuminasai). You can say this as a 'good night' when going to sleep."
-    "That's cool, thank you!",
-    "You're welcome! Anything you have mind, just ask me."
-])
+# trainer.train([
+#     "Can you teach me something in japanese?",
+#     "Do you want something simple to begin?",
+#     "Yes",
+#     "Okay let me see... Well... How about we try to learn about a japanese greeting?"
+#     "Okay!"
+#     "We could say 'おやすみなさい'(oyasuminasai). You can say this as a 'good night' when going to sleep."
+#     "That's cool, thank you!",
+#     "You're welcome! Anything you have mind, just ask me."
+# ])
 
 """ response = bot.get_response("Can you help me with something?")
 print(response)
