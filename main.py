@@ -6,39 +6,59 @@ from deep_translator import GoogleTranslator, single_detection
 
 from config import lang_token
 
+
 class Chat:
 
     def __init__(self):
-        self.msg = tk.Message(
-            frame_inner, 
-            text=f"{self.timestamp1} You:\n{tl_text.get()}", 
-            width=root.winfo_width() // 4,
-            font=app_font, 
-            bg="#001900", 
-            fg="#009600"
-        )
-        self.msg1 = tk.Message(
-            frame_inner, 
-            text=f"{self.timestamp2} Emerald:\n{self.response}",
-            width=root.winfo_width() // 4,
-            font=app_font, 
-            bg="#001900", 
-            fg="#009600"
+        self.msg1 = None
+        self.msg2 = None
+        self.bot = ChatBot(
+            'Emerald',
+            storage_adapter='chatterbot.storage.SQLStorageAdapter',
+            logic_adapters=[
+                {
+                    'import_path': 'chatterbot.logic.BestMatch',
+                    'default_response': 'I am sorry, but I do not understand.',
+                    'maximum_similarity_threshold': 0.90
+        #        'chatterbot.logic.MathematicalEvaluation',
+        #        'chatterbot.logic.TimeLogicAdapter'
+                }
+            ],
+            database_uri='sqlite:///database.sqlite3'
         )
 
-        """ def update_msg_width(event):
-        new_width = root.winfo_width() // 4
-        msg1.config(width=new_width) """
 
     def send(self):
+        input_text = tl_text.get()
+        text_input.delete(0, tk.END)
         now = datetime.now()
-        self.timestamp1 = now.strftime('%Y-%m-%d|%H:%M:%S')
-        self.response = bot.get_response(tl_text.get())
+        timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
+        response = self.bot.get_response(input_text)
         now = datetime.now()
-        self.timestamp2 = now.strftime('%Y-%m-%d|%H:%M:%S')
+        timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
         
-        self.msg.grid(column=2, sticky='ew')
-        self.msg1.grid(column=0, sticky='ew')
+        self.msg1 = tk.Message(
+            frame_inner, 
+            text=f"{timestamp} You:\n{input_text}", 
+            width=100,
+            font=app_font, 
+            justify="left",
+            bg="#001900", 
+            fg="#009600"
+        )
+
+        self.msg2 = tk.Message(
+            frame_inner, 
+            text=f"{timestamp} Emerald:\n{response}",
+            width=100,
+            font=app_font,
+            justify="left",
+            bg="#001900", 
+            fg="#009600"
+        )
+    
+        self.msg1.grid(column=2, sticky='ew')
+        self.msg2.grid(column=0, sticky='ew')
         frame_inner.grid_columnconfigure(1, weight=1)
 
         canvas.configure(scrollregion=canvas.bbox("all"))
@@ -46,32 +66,25 @@ class Chat:
 def on_canvas_resize(event):
     canvas.itemconfig(frame_window, width=event.width)
 
-#def on_enter(event):
-  
+def on_enter(event):
+    chat_start.send()
+
+def update_msg_width(event):
+    new_width = root.winfo_width() // 3
+    if chat_start.msg1 and chat_start.msg2:
+        chat_start.msg1.config(width=new_width)
+        chat_start.msg2.config(width=new_width)
 
 def translate(tl_text, lang):
     return GoogleTranslator(source='auto', target=lang).translate(tl_text)
 
+chat_start = Chat()
 
-bot = ChatBot(
-    'Emerald',
-    storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    logic_adapters=[
-        {
-            'import_path': 'chatterbot.logic.BestMatch',
-            'default_response': 'I am sorry, but I do not understand.',
-            'maximum_similarity_threshold': 0.90
-#        'chatterbot.logic.MathematicalEvaluation',
-#        'chatterbot.logic.TimeLogicAdapter'
-        }
-    ],
-    database_uri='sqlite:///database.sqlite3'
-)
 
 root = tk.Tk()
 
 root.geometry("800x800")
-root.minsize(800, 800)
+root.minsize(300, 300)
 #root.maxsize(800, 800)
 
 root['bg'] = "#001900"
@@ -135,13 +148,13 @@ send_button = tk.Button(
     frame_bottom, 
     text="Send", 
     font=app_font, 
-    command=Chat.send(self)
+    command=chat_start.send
 )
 send_button.pack(side=tk.RIGHT)
 
-#root.bind('<Return>', on_enter)
+root.bind('<Return>', on_enter)
 
-
+root.bind('<Configure>', update_msg_width)
 
 
 root.mainloop() 
