@@ -34,34 +34,32 @@ trainer2 = ChatterBotCorpusTrainer(bot)
 # trainer.train(conversation)
 
 trainer.train([
-    "Olá!",
-    "Oi!",
-    "Tudo bem?",
-    "Estou ótima e você?",
-    "Estou bem também",
-    "Fico feliz em saber! Você quer aprender algo em japonês?",
-    "Quero sim! Pode me falar uma forma de dizer oi ou olá?",
-    "Claro! Podemos dizer 'こんにちは'(konnichiwa). É assim que você diz 'oi' ou 'olá' em linguagem formal e durante o dia em japonês.",
-    "Durante o dia e formal?",
-    "Em japonês existem diversas formas de como se comunicar dependendo do contexto. Se você quiser eu posso te ensinar mais.",
-    "Entendi, obrigado",
-    "Qualquer dúvida, só me perguntar!:)"
+    "Qual o seu nome?",
+    "Meu nome é Emerald ou Esmeralda em português!",
+    "O que você é?",
+    "Sou um chatbot criado para ajudar no aprendizado de línguas!",
+    "Você gosta do que faz?",
+    "Como um chatbot, eu não tenho a capacidade de gostar de algo"
+   
 ])
 
 trainer.train([
-    "Oi",
-    "Olá!",
-    "Como você está hoje?",
-    "Estou ótima e você?",
-    "Estou bem também",
-    "Fico feliz em saber! Você quer aprender algo em japonês?",
-    "Quero sim! Pode me falar uma forma de dizer oi ou olá?",
-    "Claro! Podemos dizer 'こんにちは'(konnichiwa). É assim que você diz 'oi' ou 'olá' em linguagem formal e durante o dia em japonês.",
-    "Durante o dia e formal?",
-    "Em japonês existem diversas formas de como se comunicar dependendo do contexto. Se você quiser eu posso te ensinar mais.",
-    "Entendi, obrigado",
-    "Qualquer dúvida, só me perguntar!:)"
+    "Me ensine como dizer 'Oi, como vai você?' em inglês",
+    "Para dizer 'Oi, como vai você?', você pode dizer 'Hi, how are you?'",
+    "Obrigado",
+    "Disponha! Qualquer dúvida que você tiver, pode me perguntar!"
+
 ])
+
+trainer.train([
+    "Me ensine como dizer 'Como vai você?' em japonês",
+    "Para dizer 'Como vai você?' ou 'Como você está?' em japonês, você pode dizer 'Genki?(元気?/furigana = げんき?)' de uma forma informal. Caso queira ser mais formal, você pode usar 'O genki desu ka?(お元気ですか？/furigana = おげんきですか？)",
+    "Obrigado",
+    "Disponha! Qualquer dúvida que você tiver, pode me perguntar! Estou aqui para ajudar!"
+
+])
+
+
 
 # trainer.train([
 #     "Can you teach me something in japanese?",
