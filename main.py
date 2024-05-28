@@ -18,10 +18,8 @@ class Chat:
             logic_adapters=[
                 {
                     'import_path': 'chatterbot.logic.BestMatch',
-                    'default_response': 'I am sorry, but I do not understand.',
+                    'default_response': 'Sinto muito, mas eu não entendo',
                     'maximum_similarity_threshold': 0.90
-        #        'chatterbot.logic.MathematicalEvaluation',
-        #        'chatterbot.logic.TimeLogicAdapter'
                 }
             ],
             database_uri='sqlite:///database.sqlite3'
@@ -33,10 +31,22 @@ class Chat:
         text_input.delete(0, tk.END)
         now = datetime.now()
         timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-        response = self.bot.get_response(input_text)
         now = datetime.now()
         timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-        
+        if "traduza" in input_text.lower():
+            word_to_translate = input_text.lower().split("traduza")[1].split("para")[0].strip()
+            target_language = input_text.lower().split("para")[-1].strip()
+            print("Word to translate:", word_to_translate)
+            print("Target language:", target_language)
+            if target_language in ["japonês", "japones", "jp"]:
+                response = f'A palavra {word_to_translate} em japonês é {translate(word_to_translate, "ja")}'
+            elif target_language in ["inglês", "ingles", "en"]:
+                response = f'A palavra {word_to_translate} em inglês é {translate(word_to_translate, "en")}'
+            else:
+                    response = "Não posso traduzir isso"
+        else:
+            response = self.bot.get_response(input_text)
+
         self.msg1 = tk.Message(
             frame_inner, 
             text=f"{timestamp} You:\n{input_text}", 
@@ -85,19 +95,15 @@ root = tk.Tk()
 
 root.geometry("800x800")
 root.minsize(300, 300)
-#root.maxsize(800, 800)
 
 root['bg'] = "#001900"
 
 app_font = ('Fixedsys Excelsior', 12)
 
 api_key = lang_token
-test = True
 
 frame_top = tk.Frame(root, bg="#001900")
 frame_top.grid(row=0, column=0, columnspan=2, sticky="ew")
-#frame_middle = tk.Frame(root, bg="#001900")
-#frame_middle.grid(row=1, column=1, sticky='nsew') 
 frame_bottom = tk.Frame(root, bg="#001900")
 frame_bottom.grid(row=2, column=1, columnspan=2, sticky='ew')
 
