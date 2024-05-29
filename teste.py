@@ -7,7 +7,7 @@ bot = ChatBot(
     logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
-            'default_response': 'I am sorry, but I do not understand.',
+            'default_response': 'Sinto muito, mas eu não entendo',
             'maximum_similarity_threshold': 0.90
         }
     ],
@@ -32,28 +32,20 @@ trainer2 = ChatterBotCorpusTrainer(bot)
 # trainer.train(conversation)
 
 trainer.train([
-    "Qual o seu nome?",
-    "Meu nome é Emerald ou Esmeralda em português!",
-    "O que você é?",
-    "Sou um chatbot criado para ajudar no aprendizado de línguas!",
-    "Você gosta do que faz?",
-    "Como um chatbot, eu não tenho a capacidade de gostar de algo"
-   
+    "Me diga um fato sobre a cultura japonesa",
+    "Claro! Sobre o que você quer saber?",
+    "Quero saber sobre uma comida típica japonesa",
+    "Okay! Aqui vai uma comida típica japonesa: Sushi(寿司). O sushi é um prato típico japonês que consiste em arroz enrolado num rolinho de alga recheado com peixe cru e legumes. Acredita-se que seu surgimento aconteceu na China por volta de IV a.C. E apareceu no Japão anos depois através da Coreia. A palavra sushi tem um significado de 'arroz com vinagre'"
 ])
 
 trainer.train([
-    "Me ensine como dizer 'Oi, como vai você?' em inglês",
-    "Para dizer 'Oi, como vai você?', você pode dizer 'Hi, how are you?'",
-    "Obrigado",
-    "Disponha! Qualquer dúvida que você tiver, pode me perguntar!"
-
+    "O que é um chatbot?",
+    "Um chatbot é um programa de computador que simula uma conversa humano com um usuário. Ele é capaz de responder a perguntas, fornecer informações, realizar tarefas e até mesmointeragir com o usuário."
 ])
 
 trainer.train([
-    "Me ensine como dizer 'Como vai você?' em japonês",
-    "Para dizer 'Como vai você?' ou 'Como você está?' em japonês, você pode dizer 'Genki?(元気?/furigana = げんき?)' de uma forma informal. Caso queira ser mais formal, você pode usar 'O genki desu ka?(お元気ですか？/furigana = おげんきですか？)",
-    "Obrigado",
-    "Disponha! Qualquer dúvida que você tiver, pode me perguntar! Estou aqui para ajudar!"
+    "Por que eu deveria aprender uma nova língua?",
+    "Aprender uma nova língua pode trazer melhores oportunidades profissionais e sociais. Além disso, pode te ajudar a desenvolver habilidades de comunicação e interação em diferentes idiomas. Assim, você pode conhecer mais pessoas e entender melhor suas próprias culturas. Sem mencionar que pode ser um hobbie divertido!"
 
 ])
 
