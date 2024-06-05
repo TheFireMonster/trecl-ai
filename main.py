@@ -2,9 +2,9 @@ import tkinter as tk
 from datetime import datetime
 
 from chatterbot import ChatBot
-from deep_translator import GoogleTranslator, single_detection
+from deep_translator import GoogleTranslator
 
-from config import lang_token
+#from config import lang_token
 
 
 class Chat:
@@ -31,8 +31,6 @@ class Chat:
         text_input.delete(0, tk.END)
         now = datetime.now()
         timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
-        now = datetime.now()
-        timestamp = now.strftime('%Y-%m-%d|%H:%M:%S')
         if "traduza" in input_text.lower():
             word_to_translate = input_text.lower().split("traduza")[1].split("para")[0].strip()
             target_language = input_text.lower().split("para")[-1].strip()
@@ -56,10 +54,13 @@ class Chat:
             bg="#001900", 
             fg="#009600"
         )
-
+        
+        now2 = datetime.now()
+        timestamp2 = now2.strftime('%Y-%m-%d|%H:%M:%S')
+        
         self.msg2 = tk.Message(
             frame_inner, 
-            text=f"{timestamp} Emerald:\n{response}",
+            text=f"{timestamp2} Emerald:\n{response}",
             width=100,
             font=app_font,
             justify="left",
@@ -100,7 +101,7 @@ root['bg'] = "#001900"
 
 app_font = ('Fixedsys Excelsior', 12)
 
-api_key = lang_token
+#api_key = lang_token
 
 frame_top = tk.Frame(root, bg="#001900")
 frame_top.grid(row=0, column=0, columnspan=2, sticky="ew")

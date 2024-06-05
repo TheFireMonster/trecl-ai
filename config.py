@@ -1,7 +1,7 @@
-import os
+#import os
 
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 
-load_dotenv()
-lang_token = os.getenv('SECRET_TOKEN')
+#load_dotenv()
+#lang_token = os.getenv('SECRET_TOKEN')

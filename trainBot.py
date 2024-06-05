@@ -32,7 +32,7 @@ trainer2 = ChatterBotCorpusTrainer(bot)
 # trainer.train(conversation)
 
 trainer.train([
-    "Me diga um fato sobre a cultura japonesa",
+    "Me diga algo sobre a cultura japonesa",
     "Claro! Sobre o que você quer saber?",
     "Quero saber sobre uma comida típica japonesa",
     "Okay! Aqui vai uma comida típica japonesa: Sushi(寿司). O sushi é um prato típico japonês que consiste em arroz enrolado num rolinho de alga recheado com peixe cru e legumes. Acredita-se que seu surgimento aconteceu na China por volta de IV a.C. E apareceu no Japão anos depois através da Coreia. A palavra sushi tem um significado de 'arroz com vinagre'"
@@ -40,12 +40,12 @@ trainer.train([
 
 trainer.train([
     "O que é um chatbot?",
-    "Um chatbot é um programa de computador que simula uma conversa humano com um usuário. Ele é capaz de responder a perguntas, fornecer informações, realizar tarefas e até mesmointeragir com o usuário."
+    "Um chatbot é um programa de computador que simula uma conversa humano com um usuário. Ele é capaz de responder a perguntas, fornecer informações, realizar tarefas e até mesmo interagir com o usuário."
 ])
 
 trainer.train([
-    "Por que eu deveria aprender uma nova língua?",
-    "Aprender uma nova língua pode trazer melhores oportunidades profissionais e sociais. Além disso, pode te ajudar a desenvolver habilidades de comunicação e interação em diferentes idiomas. Assim, você pode conhecer mais pessoas e entender melhor suas próprias culturas. Sem mencionar que pode ser um hobbie divertido!"
+   "Tudo bem?",
+    "Estou bem, obrigado por perguntar!"
 
 ])
 
